@@ -5,30 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Products</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f8f8;
+            box-sizing: border-box;
         }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .home-icon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 30px;
+            color: #4CAF50;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .home-icon:hover {
+            color: #e94e77;
+            transform: scale(1.1);
+        }
+
         .container {
             width: 90%;
             max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-            color: #333;
-            font-size: 2em;
-        }
+
         .product-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
         }
+
         .product {
             background: #fff;
             border-radius: 12px;
@@ -40,65 +66,82 @@
             padding: 15px;
             margin-bottom: 20px;
         }
+
         .product:hover {
             transform: translateY(-8px);
             box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
         }
+
         .product img {
             width: 100%;
             height: auto;
             border-radius: 12px;
         }
+
         .product h2 {
-            font-size: 1.3em;
+            font-size: 1.4em;
             margin: 10px 0;
             color: #333;
             text-align: center;
+            font-family: 'Roboto', sans-serif;
         }
+
         .product p {
             color: #555;
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: 1em;
+            line-height: 1.6;
             text-align: center;
+            font-family: 'Arial', sans-serif;
         }
+
         .product-price {
-            font-size: 1.1em;
+            font-size: 1.2em;
             color: #e94e77;
             margin: 10px 0;
             text-align: center;
         }
+
         .product-date {
             color: #888;
-            font-size: 0.8em;
+            font-size: 0.9em;
             text-align: center;
         }
-        /* Home Icon */
-        .home-icon {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            font-size: 24px;
-            color: #333;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-        }
-        .home-icon:hover {
-            color: #e94e77;
-        }
-        /* Responsive Design */
+
+        /* Responsive Design for Mobile */
         @media (max-width: 768px) {
             .product {
                 width: calc(50% - 20px);
             }
+
+            .home-icon {
+                font-size: 26px;
+                left: 10px;
+                top: 10px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
         }
+
         @media (max-width: 480px) {
             .product {
                 width: 100%;
+                padding: 10px;
+            }
+
+            .home-icon {
+                font-size: 24px;
+                left: 8px;
+                top: 8px;
+            }
+
+            h1 {
+                font-size: 1.8em;
             }
         }
-        /* Modal styles */
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -111,6 +154,7 @@
             align-items: center;
             z-index: 1000;
         }
+
         .modal-content {
             background: #fff;
             padding: 20px;
@@ -119,10 +163,12 @@
             max-width: 600px;
             position: relative;
         }
+
         .modal img {
             width: 100%;
             border-radius: 12px;
         }
+
         .modal .close {
             position: absolute;
             top: 10px;
@@ -131,15 +177,20 @@
             font-size: 1.5em;
             color: #333;
         }
+
         .modal h2 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin: 10px 0;
+            font-family: 'Roboto', sans-serif;
         }
+
         .modal p {
             color: #555;
-            font-size: 1em;
-            line-height: 1.5;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
         }
+
         .modal .product-price {
             font-size: 1.3em;
             color: #e94e77;
@@ -147,9 +198,9 @@
     </style>
 </head>
 <body>
+
     <!-- Home Icon -->
     <button class="home-icon" onclick="window.location.href='/'">&#x1F3E0; Home</button>
-
 
     <div class="container">
         <h1>New Products</h1>
@@ -209,11 +260,6 @@
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
-        });
-
-        // Home icon click functionality
-        document.querySelector('.home-icon').addEventListener('click', () => {
-            window.location.href = '/';
         });
     </script>
 </body>
