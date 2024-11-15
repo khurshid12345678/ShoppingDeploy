@@ -48,20 +48,6 @@
             overflow: hidden;
         }
 
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .filter-container select {
-            padding: 10px;
-            font-size: 1em;
-            margin-right: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
         .product-list {
             display: flex;
             flex-wrap: wrap;
@@ -218,20 +204,17 @@
 
     <div class="container">
         <h1>New Products</h1>
-
-        <!-- Category Filter -->
-        <div class="filter-container">
-            <select id="categoryFilter">
-                <option value="all">All Categories</option>
-                <!-- Populate categories dynamically here -->
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="home_appliance">Home Appliances</option>
-            </select>
-        </div>
-
-        <div class="product-list" id="productList">
-            <!-- Dynamic products will be displayed here -->
+        <div class="product-list">
+            <!-- Example product item -->
+            <% products.reverse().forEach(product => { %>
+                <div class="product" data-id="<%= product._id %>">
+                    <img src="<%= product.file_url %>" alt="<%= product.product_name %>">
+                    <h2><%= product.product_name %></h2>
+                    <p><%= product.description %></p>
+                    <p class="product-price">₹<%= product.price.toFixed(2) %></p>
+                    <p class="product-date">Uploaded on: <%= new Date(product.uploaded_at).toDateString() %></p>
+                </div>
+            <% }) %>
         </div>
     </div>
 
@@ -250,35 +233,8 @@
     <script>
         const modal = document.getElementById('productModal');
         const closeModal = document.querySelector('.modal .close');
-        const products = <%= JSON.stringify(products) %>; // Assuming products are passed to the page
+        const products = <%= JSON.stringify(products) %>;
 
-        // Function to display products
-        function displayProducts(filteredProducts) {
-            const productList = document.getElementById('productList');
-            productList.innerHTML = ''; // Clear existing products
-
-            filteredProducts.reverse().forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product');
-                productDiv.setAttribute('data-id', product._id);
-                
-                productDiv.innerHTML = `
-                    <img src="${product.file_url}" alt="${product.product_name}">
-                    <h2>${product.product_name}</h2>
-                    <p>${product.description}</p>
-                    <p class="product-price">₹${product.price.toFixed(2)}</p>
-                    <p class="product-date">Uploaded on: ${new Date(product.uploaded_at).toDateString()}</p>
-                `;
-                
-                productDiv.addEventListener('click', () => {
-                    showProductDetails(product);
-                });
-                
-                productList.appendChild(productDiv);
-            });
-        }
-
-        // Function to show product details in the modal
         function showProductDetails(product) {
             document.getElementById('modalImage').src = product.file_url;
             document.getElementById('modalName').innerText = product.product_name;
@@ -288,23 +244,23 @@
             modal.style.display = 'flex';
         }
 
-        // Close modal
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
         });
 
-        // Filter products by category
-        document.getElementById('categoryFilter').addEventListener('change', (e) => {
-            const selectedCategory = e.target.value;
-            const filteredProducts = selectedCategory === 'all' 
-                ? products 
-                : products.filter(product => product.category === selectedCategory);
-
-            displayProducts(filteredProducts);
+        document.querySelectorAll('.product').forEach(productDiv => {
+            productDiv.addEventListener('click', () => {
+                const productId = productDiv.getAttribute('data-id');
+                const product = products.find(p => p._id === productId);
+                showProductDetails(product);
+            });
         });
 
-        // Initial display of all products
-        displayProducts(products);
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
