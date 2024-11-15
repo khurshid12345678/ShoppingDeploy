@@ -1,34 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Reset and global styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .container {
             width: 90%;
             max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
+
         h1 {
             text-align: center;
             margin: 20px 0;
             color: #333;
             font-size: 1.8em;
         }
+
+        /* Home icon styles */
+        .home-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8em;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .home-icon:hover {
+            color: #e94e77;
+        }
+
+        /* Product list styles */
         .product-list {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
         }
+
         .product {
             background: #fff;
             border-radius: 8px;
@@ -39,44 +62,53 @@
             cursor: pointer;
             padding: 10px;
         }
+
         .product:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
         }
+
         .product img {
             width: 100%;
             border-radius: 8px;
             height: auto;
         }
+
         .product h2 {
             font-size: 1.2em;
             margin: 10px 0;
             color: #333;
         }
+
         .product p {
             color: #555;
             font-size: 0.9em;
             line-height: 1.4;
         }
+
         .product-price {
             font-size: 1em;
             color: #e94e77;
             margin: 5px 0;
         }
+
         .product-date {
             color: #888;
             font-size: 0.8em;
         }
+
         @media (max-width: 768px) {
             .product {
                 width: calc(50% - 20px);
             }
         }
+
         @media (max-width: 480px) {
             .product {
                 width: 100%;
             }
         }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -90,6 +122,7 @@
             align-items: center;
             z-index: 1000;
         }
+
         .modal-content {
             background: #fff;
             padding: 15px;
@@ -98,10 +131,12 @@
             max-width: 500px;
             position: relative;
         }
+
         .modal img {
             width: 100%;
             border-radius: 8px;
         }
+
         .modal .close {
             position: absolute;
             top: 10px;
@@ -110,33 +145,42 @@
             font-size: 1.2em;
             color: #333;
         }
+
         .modal h2 {
             font-size: 1.2em;
             margin: 10px 0;
         }
+
         .modal p {
             color: #555;
             font-size: 0.9em;
             line-height: 1.4;
         }
+
         .modal .product-price {
             font-size: 1.2em;
             color: #e94e77;
         }
     </style>
 </head>
+
 <body>
+    <!-- Home Icon -->
+    <div class="home-icon">
+        <a href="/"><i class="fas fa-home"></i></a>
+    </div>
+
     <div class="container">
         <h1>New Products</h1>
         <div class="product-list">
             <!-- Example product item -->
             <% products.forEach(product => { %>
-                <div class="product" data-id="<%= product._id %>">
-                    <img src="<%= product.file_url %>" alt="<%= product.product_name %>">
-                    <h2><%= product.product_name %></h2>
-                    <p><%= product.description %></p>
-                    <p class="product-price">₹<%= product.price.toFixed(2) %></p>
-                </div>
+            <div class="product" data-id="<%= product._id %>">
+                <img src="<%= product.file_url %>" alt="<%= product.product_name %>">
+                <h2><%= product.product_name %></h2>
+                <p><%= product.description %></p>
+                <p class="product-price">₹<%= product.price.toFixed(2) %></p>
+            </div>
             <% }) %>
         </div>
     </div>
@@ -186,4 +230,5 @@
         });
     </script>
 </body>
+
 </html>
