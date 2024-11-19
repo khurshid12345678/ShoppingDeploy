@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 
-
+//
 // Use routes
 app.use('/', pageRoutes); // Handle routes for pages
 app.use('/users', userRoutes); // Handle user-related routes
